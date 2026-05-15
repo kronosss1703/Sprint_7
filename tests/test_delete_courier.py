@@ -1,6 +1,6 @@
 import allure
 import requests
-from helpers.courier_helper import register_new_courier
+from helpers.courier_api import register_new_courier
 from data.messages import COURIER_DELETE_NOT_FOUND
 from conftest import BASE_URL
 

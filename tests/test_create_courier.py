@@ -1,7 +1,7 @@
 import allure
 import pytest
 import requests
-from helpers.courier_helper import generate_random_string
+from helpers.data_generator import generate_random_string
 from data.messages import COURIER_CREATE_DUPLICATE, COURIER_CREATE_MISSING_DATA
 from conftest import BASE_URL
 

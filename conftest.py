@@ -1,6 +1,6 @@
 import pytest
 import requests
-from helpers.courier_helper import register_new_courier, delete_courier
+from helpers.courier_api import register_new_courier, delete_courier
 from data.order_data import BASE_ORDER_PAYLOAD
 
 BASE_URL = "https://qa-scooter.praktikum-services.ru/api/v1"
@@ -16,6 +16,14 @@ def new_courier():
 def created_order():
     payload = BASE_ORDER_PAYLOAD.copy()
     payload["color"] = ["BLACK"]
+    response = requests.post(f"{BASE_URL}/orders", json=payload)
+    track = response.json().get("track") if response.status_code == 201 else None
+    yield track
+
+@pytest.fixture
+def created_order_no_color():
+    payload = BASE_ORDER_PAYLOAD.copy()
+    payload["color"] = []
     response = requests.post(f"{BASE_URL}/orders", json=payload)
     track = response.json().get("track") if response.status_code == 201 else None
     yield track
